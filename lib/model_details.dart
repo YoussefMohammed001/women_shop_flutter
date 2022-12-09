@@ -74,7 +74,7 @@ class _ModelDetailsState extends State<ModelDetails> {
             Container(
                 margin: EdgeInsets.all(10),
 
-                child: Text("${widget.products['Description']}",style: TextStyle(color: Colors.pink,fontWeight: FontWeight.bold),)),
+                child: Text("${widget.products['description']}",style: TextStyle(color: Colors.pink,fontWeight: FontWeight.bold),)),
             Spacer(),
 
             Container(

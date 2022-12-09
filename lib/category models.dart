@@ -22,7 +22,7 @@ class _CategoryModelsState extends State<CategoryModels> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(widget.category),),
-      body:  ListView.builder(
+      body:  GridView.builder(
 
 
         itemBuilder: (context, index) {
@@ -37,7 +37,7 @@ class _CategoryModelsState extends State<CategoryModels> {
 
               margin: EdgeInsets.all(20),
               padding: EdgeInsets.all(10),
-              child: Row(
+              child: Column(
                 children: [
                   Container(
 
@@ -47,25 +47,28 @@ class _CategoryModelsState extends State<CategoryModels> {
                       radius: 40,
                     ),
                   ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('  ${widget.docs[index]['name']}',style: TextStyle(fontWeight: FontWeight.bold),),
-                      Text('  Price: ${widget.docs[index]['price']}'),
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text('  ${widget.docs[index]['name']}',style: TextStyle( overflow: TextOverflow.ellipsis ,fontWeight: FontWeight.bold),maxLines: 2,textAlign:TextAlign.center ,),
+                        Text('  Price: ${widget.docs[index]['price']}'),
 
-                    ],
+                      ],
+                    ),
                   ),
-                  Spacer(),
+
 
 
 
                 ],
+
               ),
             ),
           );
         },
-        itemCount:widget.docs.length,
+        itemCount:widget.docs.length, gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
       )
 
     );

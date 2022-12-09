@@ -92,25 +92,25 @@ class _HomeScreenState extends State<HomeScreen> {
         String category = "";
         switch (index) {
           case 0:
-            category = "Acsesories";
+            category = "Adventure";
             break;
           case 1:
-            category = "Bags";
+            category = "Crime";
             break;
           case 2:
-            category = "Bath and Body";
+            category = "History";
             break;
           case 3:
-            category = "Beauty";
+            category = "Horror";
             break;
           case 4:
-            category = "Dresses";
+            category = "Programming";
             break;
           case 5:
-            category = "Kitchen";
+            category = "Science";
             break;
             case 6:
-            category = "Pants";
+            category = "War";
             break;
             case 7:
             category = "Shoes";
@@ -189,52 +189,50 @@ class _HomeScreenState extends State<HomeScreen> {
         });
       },
       child: Container(
-        color: Colors.grey,
-        margin: EdgeInsets.all(5),
-        child: Container(
-          color: Colors.white,
-          margin: EdgeInsets.all(5),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(
-                child: Image.network(
-                  data["image"],
-                  height: 25,
-                  width: 25,
-                  fit: BoxFit.fill,
-                ),
-              ),
-              SizedBox(
-                height: 1,
-              ),
-              Text(
-                data['name'],
-                textAlign: TextAlign.center,
-                maxLines: 2,
-                style: const TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.bold,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-              Text(
-                data['price'],
-                style: const TextStyle(color: Colors.pink),
-              ),
-              SizedBox(
-                width: 2,
-              ),
+        decoration: BoxDecoration(
+            color: Colors.white,
+          borderRadius: BorderRadius.circular(20)
+        ),
+        margin: EdgeInsets.all(10),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Expanded(
+              child: Image.network(
+                data["image"],
+                height: 90,
+                width: 90,
+                fit: BoxFit.fitWidth,
 
-            ],
+              ),
+            ),
+            SizedBox(
+              height: 1,
+            ),
+            Text(
+              data['name'],
+              textAlign: TextAlign.center,
+              maxLines: 2,
+              style: const TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+            Text(
+              data['price'],
+              style: const TextStyle(color: Colors.pink),
+            ),
+            SizedBox(
+              width: 2,
+            ),
 
-          ),
+          ],
+
         ),
       ),
     );
   }
-
-
 
 
 
