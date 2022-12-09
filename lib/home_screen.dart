@@ -43,66 +43,22 @@ class _HomeScreenState extends State<HomeScreen> {
   }
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-
-
-      body: Column(
+    return Expanded(
+      child: ListView(
         children: [
-          Container(
-            padding: EdgeInsets.all(5),
-            color: Colors.pink,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Expanded(child: buildCustomSearch()),
-                Center(
-                  child: Container(
-margin: EdgeInsets.only(bottom: 10),
-
-                    child: IconButton(onPressed: () {
-
-                    }, icon: IconButton(icon: Icon(Icons.shopping_cart,size: 33,),color: Colors.white, onPressed: () {
-
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => CartScreen(),));
-
-                    },)),
-                  ),
-                )
-              ],
-            ),
-          ),
-
-          Expanded(
-            child: SingleChildScrollView(
-              scrollDirection: Axis.vertical,
-              child: Container(
-
-
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-
-                    buildCategoryList(),
-                    Text(" Best Items",style: TextStyle(color: Colors.pink,fontSize: 25,fontWeight: FontWeight.bold),),
-
-
-                    buildBestItemsList(),
-
-                    Text(" New Items",style: TextStyle(color: Colors.pink,fontSize: 25,fontWeight: FontWeight.bold),),
-                    buildNewItemsList()
-
-
-
-                  ],
-                ),
-              ),
-            ),
-          )
+          buildCategoryList(),
+          Padding(
+              padding: EdgeInsets.all(10),
+              child: Text(
+                "New Products",
+                style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20),
+              )),
+          buildBestItemsList(),
         ],
       ),
-
-
     );
   }
 
@@ -111,24 +67,18 @@ margin: EdgeInsets.only(bottom: 10),
       stream: FirebaseFirestore.instance.collection("category").snapshots(),
       builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.hasData) {
-          return Column(
-            children: [
-              Container(
-                height: 80,
-                margin: EdgeInsets.all(10),
-                child: Expanded(
-                  child: ListView.builder(
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    itemCount: snapshot.data!.docs.length,
-                    itemBuilder: (context, index) {
-                      var data = snapshot.data!.docs[index];
-                      return categoryItem(index, data);
-                    },
-                  ),
-                ),
-              ),
-            ],
+          return Container(
+            height: 100,
+            margin: EdgeInsets.all(10),
+            child: ListView.builder(
+              shrinkWrap: true,
+              scrollDirection: Axis.horizontal,
+              itemCount: snapshot.data!.docs.length,
+              itemBuilder: (context, index) {
+                var data = snapshot.data!.docs[index];
+                return categoryItem(index, data);
+              },
+            ),
           );
         } else {
           return CircularProgressIndicator();
@@ -145,19 +95,25 @@ margin: EdgeInsets.only(bottom: 10),
             category = "Acsesories";
             break;
           case 1:
-            category = "Bath and Body";
+            category = "Bags";
             break;
           case 2:
-            category = "Beauty";
+            category = "Bath and Body";
             break;
           case 3:
-            category = "Dresses";
+            category = "Beauty";
             break;
           case 4:
-            category = "Kitchen";
+            category = "Dresses";
             break;
           case 5:
+            category = "Kitchen";
+            break;
+            case 6:
             category = "Pants";
+            break;
+            case 7:
+            category = "Shoes";
             break;
 
 
@@ -195,30 +151,22 @@ margin: EdgeInsets.only(bottom: 10),
     );
   }
 
-
   Widget buildBestItemsList() {
     return StreamBuilder(
       stream: FirebaseFirestore.instance.collection("Best Items").snapshots(),
       builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.hasData) {
-          return Column(
-            children: [
-              Container(
-                height: 80,
-                margin: EdgeInsets.all(10),
-                child: Expanded(
-                  child: ListView.builder(
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    itemCount: snapshot.data!.docs.length,
-                    itemBuilder: (context, index) {
-                      var data = snapshot.data!.docs[index];
-                      return bestItem(index, data);
-                    },
-                  ),
-                ),
-              ),
-            ],
+          return SizedBox(
+            child: GridView.builder(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+
+              itemCount: snapshot.data!.docs.length,
+              itemBuilder: (context, index) {
+                var data = snapshot.data!.docs[index];
+                return bestItem(index, data);
+              }, gridDelegate:  const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+            ),
           );
         } else {
           return CircularProgressIndicator();
@@ -229,138 +177,66 @@ margin: EdgeInsets.only(bottom: 10),
     );
   }
   Widget bestItem(index, data) {
-    return Container(
-      margin: EdgeInsets.all(10),
-      padding: EdgeInsets.all(10),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5), color: Colors.grey[200]),
-      child: InkWell(
-        onTap: (){
-          String category = "Bes Items";
-          FirebaseFirestore.instance.collection('Best Items').get()
-              .then((value) {
-            List<Map<dynamic, dynamic>> docs = [];
-            for (var doc in value.docs) {
-              docs.add(doc.data());
-            }
-            Navigator.push(context, MaterialPageRoute(builder: (context) => ModelDetails(docs[index])));
-
-            //m
-          });
-        },
-        child: Row(
-
-          children: [
-
-              Image.network(data['image'],width: 150,height: 150,),
-
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Expanded(child: Text(data['name'],style: TextStyle(fontWeight: FontWeight.bold,fontSize: 22),)),
-                Text(data['price']),
-              ],
-            ),
-
-          ],
-        ),
-      ),
-    );
-  }
-
-
-  Widget buildNewItemsList() {
-    return StreamBuilder(
-      stream: FirebaseFirestore.instance.collection("New Items").snapshots(),
-      builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-        if (snapshot.hasData) {
-
-          return Container(
-            height: double.infinity,
-
-            width: double.infinity,
-
-
-            child: ListView.builder(
-
-              scrollDirection: Axis.vertical,
-              itemBuilder: (context, index) {
-                var data = snapshot.data!.docs[index];
-
-                return InkWell(
-                  onTap: () {
-
-                    FirebaseFirestore.instance.collection('New Items').get()
-                        .then((value) {
-                      List<Map<dynamic, dynamic>> docs = [];
-                      for (var doc in value.docs) {
-                        docs.add(doc.data());
-                      }
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => ModelDetails(docs[index])));
-
-                      //m
-                    });
-
-                  },
-                  child: Container(
-                    margin: EdgeInsets.only(right: 10,top: 10,bottom: 10,left: 10),
-
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10), color: Colors.grey[200]),
-
-                    child: Row(
-
-                      children: [
-
-                          Image.network(data['image'],height: 100,width: 100,),
-
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(data['name'],style: TextStyle(fontWeight: FontWeight.bold),),
-                            Text(data['price']),
-                          ],
-                        ),
-                        Spacer(),
-
-
-                      ],
-                    ),
-                  ),
-                );
-              },
-              itemCount: snapshot.data!.docs.length,
-            ),
-          );
-        } else {
-          return CircularProgressIndicator();
-        }
+    return InkWell(
+      onTap: (){
+        FirebaseFirestore.instance.collection('Best Items').get()
+            .then((value) {
+          List<Map<dynamic, dynamic>> docs = [];
+          for (var doc in value.docs) {
+            docs.add(doc.data());
+          }
+          Navigator.push(context, MaterialPageRoute(builder: (context) => ModelDetails(docs[index])));
+        });
       },
-    );
-  }
+      child: Container(
+        color: Colors.grey,
+        margin: EdgeInsets.all(5),
+        child: Container(
+          color: Colors.white,
+          margin: EdgeInsets.all(5),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: Image.network(
+                  data["image"],
+                  height: 25,
+                  width: 25,
+                  fit: BoxFit.fill,
+                ),
+              ),
+              SizedBox(
+                height: 1,
+              ),
+              Text(
+                data['name'],
+                textAlign: TextAlign.center,
+                maxLines: 2,
+                style: const TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              Text(
+                data['price'],
+                style: const TextStyle(color: Colors.pink),
+              ),
+              SizedBox(
+                width: 2,
+              ),
 
+            ],
 
-
-  Widget buildCustomSearch(){
-    return Container(
-
-      margin: EdgeInsets.only(left: 5,top: 5),
-      decoration:BoxDecoration(borderRadius:BorderRadius.circular(5),color: Colors.pink ),
-      child: TextFormField(
-        decoration: InputDecoration(
-            hintText: " Search",
-            hintStyle: TextStyle(color: Colors.white),
-            prefixIcon: Icon(Icons.search,color: Colors.white,),
-
-            border: InputBorder.none
+          ),
         ),
       ),
     );
-
-
-
   }
+
+
+
+
 
 
 

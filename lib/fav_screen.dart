@@ -11,18 +11,11 @@ class FavoritScreen extends StatelessWidget {
    @override
   Widget build(BuildContext context) {
 
-      return Scaffold(
-        appBar: AppBar(title: Center(child: Text("Favorites")),),
-        body: SafeArea(
-
-          child:  fetchData("users-favourite-items"),
-        ),
-
-
-
-
-
-    );
+      return Expanded(
+        child: SizedBox(
+            height: double.infinity,
+            child: fetchData("users-favourite-items")),
+      );
   }
 
 

@@ -83,9 +83,7 @@ backgroundColor: Colors.pink,
                 Text("A verification Email has been sent to your email"
                 , style: TextStyle(color: Colors.pink,fontWeight: FontWeight.bold,fontSize: 18),
                 ),
-                Text("You Must Verify Your Email to confirm Your Registeration"
-                  , style: TextStyle(color: Colors.pink,fontWeight: FontWeight.bold,fontSize: 13),
-                ),
+
                 ElevatedButton(onPressed: () {
                   FirebaseAuth.instance.signOut();
 

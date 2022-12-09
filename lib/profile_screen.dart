@@ -39,15 +39,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Colors.pink,
-
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Center(
+    return Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Center(
+            child: Expanded(
               child: Container(
+
 
 
                 decoration: BoxDecoration(
@@ -55,8 +53,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                 margin: EdgeInsets.all(20),
                 padding: EdgeInsets.all(10),
-                child: Column(children: [
-
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
                   Text("$name",style: TextStyle(color: Colors.pink,fontSize: 22,fontWeight: FontWeight.bold),),
                   Text("$phoneNumber",style: TextStyle(color: Colors.pink,fontSize: 22,fontWeight: FontWeight.bold),),
                   Text("$email",style: TextStyle(color: Colors.pink,fontSize: 22,fontWeight: FontWeight.bold),),
@@ -74,9 +73,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ],),
               ),
             ),
-          ],
-        ),
-      ),
+          ),
+        ],
     );
   }
 
