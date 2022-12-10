@@ -60,7 +60,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     }
                   },
                   keyBoardType: TextInputType.emailAddress, lableText: "Email", textInputAction: TextInputAction.next, obscure:false,
-                  prefxi: Icon(Icons.email_outlined,color: Colors.pink,),
+                  prefxi: Icon(Icons.email_outlined,color: Colors.blue[900],),
                 ),
                 SizedBox(height: 10,),
                 MyTextField(
@@ -73,13 +73,13 @@ class _SignInScreenState extends State<SignInScreen> {
               }
             },
             obscure: isNotVisible,keyBoardType: TextInputType.visiblePassword, lableText: "Password", textInputAction: TextInputAction.done,
-            prefxi: Icon(Icons.password,color: Colors.pink,),
+            prefxi: Icon(Icons.password,color: Colors.blue[900],),
 
             suffixIcon: IconButton(onPressed: () {
               isNotVisible = !isNotVisible;
               setState(() {});
               }
-              , icon: Icon(isNotVisible ? Icons.visibility_off_outlined : Icons.visibility ,color: Colors.pink,)),
+              , icon: Icon(isNotVisible ? Icons.visibility_off_outlined : Icons.visibility ,color: Colors.blue[900],)),
 
         ),
                 Container(

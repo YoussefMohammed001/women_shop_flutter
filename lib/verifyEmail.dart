@@ -64,7 +64,7 @@ if(!isEmailVerified){
       MainHomeScreen() : SafeArea(
 
         child: Scaffold(
-backgroundColor: Colors.pink,
+backgroundColor: Colors.blue[900],
 
     body: Center(
       child: Container(
@@ -81,7 +81,7 @@ backgroundColor: Colors.pink,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text("A verification Email has been sent to your email"
-                , style: TextStyle(color: Colors.pink,fontWeight: FontWeight.bold,fontSize: 18),
+                , style: TextStyle(color: Colors.blue[900],fontWeight: FontWeight.bold,fontSize: 18),
                 ),
 
                 ElevatedButton(onPressed: () {

@@ -21,7 +21,7 @@ class _CategoryModelsState extends State<CategoryModels> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(widget.category),),
+      appBar: AppBar(title: Text(widget.category),backgroundColor: Colors.blue[900],),
       body:  GridView.builder(
 
 

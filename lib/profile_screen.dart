@@ -56,9 +56,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                  Text("$name",style: TextStyle(color: Colors.pink,fontSize: 22,fontWeight: FontWeight.bold),),
-                  Text("$phoneNumber",style: TextStyle(color: Colors.pink,fontSize: 22,fontWeight: FontWeight.bold),),
-                  Text("$email",style: TextStyle(color: Colors.pink,fontSize: 22,fontWeight: FontWeight.bold),),
+                  Text("$name",style: TextStyle(color: Colors.blue[900],fontSize: 22,fontWeight: FontWeight.bold),),
+                  Text("$phoneNumber",style: TextStyle(color: Colors.blue[900],fontSize: 22,fontWeight: FontWeight.bold),),
+                  Text("$email",style: TextStyle(color: Colors.blue[900],fontSize: 22,fontWeight: FontWeight.bold),),
                   Center(
 
                     child: Container(

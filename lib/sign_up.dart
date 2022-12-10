@@ -84,7 +84,7 @@ body: Container(
               isNotVisible = !isNotVisible;
               setState(() {});
             }
-                , icon: Icon(isNotVisible ? Icons.visibility_off_outlined : Icons.visibility ,color: Colors.pink,)),
+                , icon: Icon(isNotVisible ? Icons.visibility_off_outlined : Icons.visibility ,color: Colors.blue[900],)),
             validator: (value){
               if(value!.isEmpty){
                 return "Please enter your Password";
@@ -99,7 +99,7 @@ body: Container(
               isConfirmPassNotVisible = !isConfirmPassNotVisible;
               setState(() {});
             }
-                , icon: Icon(isConfirmPassNotVisible ? Icons.visibility_off_outlined : Icons.visibility ,color: Colors.pink,)),
+                , icon: Icon(isConfirmPassNotVisible ? Icons.visibility_off_outlined : Icons.visibility ,color: Colors.blue[900],)),
           validator: (value) {
             if (value!.isEmpty) {
               return "Please confirm your password";

@@ -219,7 +219,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             Text(
               data['price'],
-              style: const TextStyle(color: Colors.pink),
+              style:  TextStyle(color: Colors.blue[900]),
             ),
             SizedBox(
               width: 2,

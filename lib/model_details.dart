@@ -54,7 +54,7 @@ class _ModelDetailsState extends State<ModelDetails> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(title: Text('${widget.products['name']}'),),
+        appBar: AppBar(title: Text('${widget.products['name']}'),backgroundColor: Colors.blue[900],),
 
         body:Column(
           children: [
@@ -62,7 +62,7 @@ class _ModelDetailsState extends State<ModelDetails> {
 
             Container(
               padding: EdgeInsets.all(20),
-              color: Colors.pink,
+              color: Colors.blue[900],
               child: Row(
                 children: [
                   Text("${widget.products['name']}",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
@@ -74,7 +74,7 @@ class _ModelDetailsState extends State<ModelDetails> {
             Container(
                 margin: EdgeInsets.all(10),
 
-                child: Text("${widget.products['description']}",style: TextStyle(color: Colors.pink,fontWeight: FontWeight.bold),)),
+                child: Text("${widget.products['description']}",style: TextStyle(color: Colors.blue[900],fontWeight: FontWeight.bold),)),
             Spacer(),
 
             Container(

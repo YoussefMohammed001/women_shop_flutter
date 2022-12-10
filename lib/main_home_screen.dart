@@ -52,7 +52,7 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
             children: [
 Container(
   padding: EdgeInsets.all(20),
-  color: Colors.pink,
+  color: Colors.blue[900],
   child:   Row(
     children: [
       Text("Welcome,$name",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 22),)
@@ -70,7 +70,7 @@ Container(
     return BottomNavigationBar(
 
       type: BottomNavigationBarType.fixed,
-      backgroundColor: Colors.pink,
+      backgroundColor: Colors.blue[900],
       selectedItemColor: Colors.white,
       unselectedItemColor: Colors.black.withOpacity(.60),
       selectedFontSize: 14,
