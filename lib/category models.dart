@@ -52,7 +52,8 @@ class _CategoryModelsState extends State<CategoryModels> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Text('  ${widget.docs[index]['name']}',style: TextStyle( overflow: TextOverflow.ellipsis ,fontWeight: FontWeight.bold),maxLines: 2,textAlign:TextAlign.center ,),
+                        Expanded(child: Text('  ${widget.docs[index]['name']}',style: TextStyle( overflow: TextOverflow.ellipsis ,fontWeight: FontWeight.bold),maxLines: 2,textAlign:TextAlign.center ,)),
+                        SizedBox(height: 3,),
                         Text('  Price: ${widget.docs[index]['price']}'),
 
                       ],

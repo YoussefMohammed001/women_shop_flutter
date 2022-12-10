@@ -112,9 +112,7 @@ class _HomeScreenState extends State<HomeScreen> {
             case 6:
             category = "War";
             break;
-            case 7:
-            category = "Shoes";
-            break;
+
 
 
 

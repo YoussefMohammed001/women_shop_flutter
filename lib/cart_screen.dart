@@ -68,13 +68,17 @@ class CartScreen extends StatelessWidget {
                   child: Row(
                     children: [
                       Image.network("${_documentSnapshot['image']}",height: 100,width: 100,),
-                      Column(
-                        children: [
-                          Text("${_documentSnapshot['name']}"),
-                          Text("${_documentSnapshot['price']}"),
-                        ],
+                      Expanded(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("${_documentSnapshot['name']}",style: TextStyle(),maxLines: 1,),
+                            Text("${_documentSnapshot['price']}"),
+                          ],
+                        ),
                       ),
-                      Spacer(),
+
                       IconButton(onPressed: () {
                         FirebaseFirestore.instance
                             .collection(collectionName)

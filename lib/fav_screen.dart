@@ -70,13 +70,16 @@ class FavoritScreen extends StatelessWidget {
                    child: Row(
                     children: [
                       Image.network("${_documentSnapshot['image']}",height: 100,width: 100,),
-                      Column(
-                        children: [
-                          Text("${_documentSnapshot['name']}"),
-                          Text("${_documentSnapshot['price']}"),
-                        ],
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("${_documentSnapshot['name']}",maxLines: 1,),
+                            Text("${_documentSnapshot['price']}"),
+                          ],
+                        ),
                       ),
-                      Spacer(),
+
                     IconButton(onPressed: () {
                       FirebaseFirestore.instance
                           .collection(collectionName)
