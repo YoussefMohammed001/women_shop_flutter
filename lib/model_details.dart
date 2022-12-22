@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:women_shop/cart_screen.dart';
+import 'package:women_shop/reservation_screen.dart';
 
 class ModelDetails extends StatefulWidget {
   ModelDetails(this.products,{Key? key}) : super(key: key);
@@ -13,6 +15,32 @@ class ModelDetails extends StatefulWidget {
 }
 
 class _ModelDetailsState extends State<ModelDetails> {
+  String name= "";
+  String email= "";
+  String phoneNumber= "";
+
+
+  Future _getDataFromDatabase() async{
+    await FirebaseFirestore.instance.collection("users")
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .get().then((snapshot) async{
+      if(snapshot.exists){
+        setState(() {
+          name = snapshot.data()!['name'];
+          email  = snapshot.data()!['email'];
+          phoneNumber =  snapshot.data()!['phone number'];
+
+        });
+      }
+    });
+  }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _getDataFromDatabase();
+  }
+
   Future addToFavourite() async {
     final FirebaseAuth _auth = FirebaseAuth.instance;
     var currentUser = _auth.currentUser;
@@ -76,9 +104,12 @@ class _ModelDetailsState extends State<ModelDetails> {
 
                 child: Text("${widget.products['description']}",style: TextStyle(color: Colors.blue[900],fontWeight: FontWeight.bold),)),
             Spacer(),
-
+Container(
+    width: double.infinity,
+    margin: EdgeInsets.only(left: 20,right: 20),
+    child: OutlinedButton(onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context)=> GenerateQrCode(data: '${widget.products['name'] +"\n" +   FirebaseAuth.instance.currentUser!.email}')));}, child: Text("Reservation Now"))),
             Container(
-              margin: EdgeInsets.all(20),
+              margin: EdgeInsets.only(left: 20,right: 20,bottom: 20,top: 10),
               child: Row(
 
                 children: [
@@ -89,6 +120,7 @@ class _ModelDetailsState extends State<ModelDetails> {
                     builder: (BuildContext context, AsyncSnapshot snapshot){
                       if(snapshot.data == null){
                         return Text("");
+
 
                       }
                       return     Expanded(
