@@ -93,16 +93,19 @@ class _ModelDetailsState extends State<ModelDetails> {
               color: Colors.blue[900],
               child: Row(
                 children: [
-                  Text("${widget.products['name']}",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
+
+                  Expanded(child: Text("${widget.products['name']}",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)),
                   Spacer(),
                   Text("${widget.products['price']}",style: TextStyle(color: Colors.white),),
                 ],
               ),
             ),
-            Container(
-                margin: EdgeInsets.all(10),
+            SingleChildScrollView(
+              child: Container(
+                  margin: EdgeInsets.all(10),
 
-                child: Text("${widget.products['description']}",style: TextStyle(color: Colors.blue[900],fontWeight: FontWeight.bold),)),
+                  child: Text("${widget.products['description']}",style: TextStyle(color: Colors.blue[900],fontWeight: FontWeight.bold),)),
+            ),
             Spacer(),
 Container(
     width: double.infinity,
