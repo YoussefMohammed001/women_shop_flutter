@@ -84,88 +84,88 @@ class _ModelDetailsState extends State<ModelDetails> {
       child: Scaffold(
         appBar: AppBar(title: Text('${widget.products['name']}'),backgroundColor: Colors.blue[900],),
 
-        body:Column(
-          children: [
-            Image.network(widget.products['image'],height: 250,width: double.infinity,fit: BoxFit.fill,),
+        body:SingleChildScrollView(
+          child: Column(
+            children: [
+              Image.network(widget.products['image'],height: 250,width: double.infinity,fit: BoxFit.fill,),
 
-            Container(
-              padding: EdgeInsets.all(20),
-              color: Colors.blue[900],
-              child: Row(
-                children: [
+              Container(
+                padding: EdgeInsets.all(20),
+                color: Colors.blue[900],
+                child: Row(
+                  children: [
 
-                  Expanded(child: Text("${widget.products['name']}",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)),
-                  Spacer(),
-                  Text("${widget.products['price']}",style: TextStyle(color: Colors.white),),
-                ],
+                    Expanded(child: Text("${widget.products['name']}",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)),
+                    Spacer(),
+                    Text("${widget.products['price']}",style: TextStyle(color: Colors.white),),
+                  ],
+                ),
               ),
-            ),
-            SingleChildScrollView(
-              child: Container(
+              Container(
                   margin: EdgeInsets.all(10),
 
                   child: Text("${widget.products['description']}",style: TextStyle(color: Colors.blue[900],fontWeight: FontWeight.bold),)),
-            ),
-            Spacer(),
+              Spacer(),
 Container(
     width: double.infinity,
     margin: EdgeInsets.only(left: 20,right: 20),
     child: OutlinedButton(onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context)=> GenerateQrCode(data: '${widget.products['name'] +"\n" +   FirebaseAuth.instance.currentUser!.email}')));}, child: Text("Reservation Now"))),
-            Container(
-              margin: EdgeInsets.only(left: 20,right: 20,bottom: 20,top: 10),
-              child: Row(
+              Container(
+                margin: EdgeInsets.only(left: 20,right: 20,bottom: 20,top: 10),
+                child: Row(
 
-                children: [
-                  StreamBuilder(
-                    stream: FirebaseFirestore.instance.collection("users-cart-items").doc(FirebaseAuth.instance.currentUser!.email)
-                        .collection('items').where(
-                        'name', isEqualTo: widget.products['name']).snapshots(),
-                    builder: (BuildContext context, AsyncSnapshot snapshot){
-                      if(snapshot.data == null){
-                        return Text("");
+                  children: [
+                    StreamBuilder(
+                      stream: FirebaseFirestore.instance.collection("users-cart-items").doc(FirebaseAuth.instance.currentUser!.email)
+                          .collection('items').where(
+                          'name', isEqualTo: widget.products['name']).snapshots(),
+                      builder: (BuildContext context, AsyncSnapshot snapshot){
+                        if(snapshot.data == null){
+                          return Text("");
 
 
-                      }
-                      return     Expanded(
-                        child: ElevatedButton(onPressed: () {
+                        }
+                        return     Expanded(
+                          child: ElevatedButton(onPressed: () {
     snapshot.data.docs.length == 0? addToCart() : '';
 
     }, child:snapshot.data.docs.length == 0? Icon(Icons.add_shopping_cart_outlined): Icon(Icons.shopping_cart_checkout)),
 
 
-                      );
-                    },
+                        );
+                      },
 
-                  ),
+                    ),
 
-                  SizedBox(width: 5,),
+                    SizedBox(width: 5,),
 
-                  StreamBuilder(
-                    stream: FirebaseFirestore.instance.collection("users-favourite-items").doc(FirebaseAuth.instance.currentUser!.email)
-                        .collection('items').where(
-                        'name', isEqualTo: widget.products['name']).snapshots(),
-                    builder: (BuildContext context, AsyncSnapshot snapshot){
-                      if(snapshot.data == null){
-                        return Text("");
+                    StreamBuilder(
+                      stream: FirebaseFirestore.instance.collection("users-favourite-items").doc(FirebaseAuth.instance.currentUser!.email)
+                          .collection('items').where(
+                          'name', isEqualTo: widget.products['name']).snapshots(),
+                      builder: (BuildContext context, AsyncSnapshot snapshot){
+                        if(snapshot.data == null){
+                          return Text("");
 
-                      }
+                        }
 return     Expanded(
   child:   ElevatedButton(onPressed: () {
     snapshot.data.docs.length == 0? addToFavourite() : "";
 
   }, child:snapshot.data.docs.length == 0? Icon(Icons.favorite_border): Icon(Icons.favorite)),
 );
-                    },
+                      },
 
-                  ),
-                ],
-              ),
-            )
-
-
+                    ),
+                  ],
+                ),
+              )
 
 
-          ],
+
+
+            ],
+          ),
         ),
       ),
     );
